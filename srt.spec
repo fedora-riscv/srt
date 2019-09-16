@@ -1,5 +1,5 @@
 Name:           srt
-Version:        1.3.4
+Version:        1.4.0
 Release:        1%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
@@ -63,6 +63,9 @@ rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 %{_libdir}/pkgconfig/srt.pc
 
 %changelog
+* Mon Sep 16 2019 Yanko Kaneti <yaneti@declera.com> - 1.4.0-1
+- Update to 1.4.0
+
 * Wed Sep 11 2019 Yanko Kaneti <yaneti@declera.com> - 1.3.4-1
 - Update to 1.3.4
 
