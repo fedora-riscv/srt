@@ -1,6 +1,6 @@
 Name:           srt
 Version:        1.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -8,7 +8,12 @@ URL:            https://www.srtalliance.org
 Source0:        https://github.com/Haivision/srt/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake gcc-c++
-BuildRequires:  openssl-devel
+BuildRequires:  gnutls-devel
+BuildRequires:  gmock-devel
+BuildRequires:  gtest-devel
+
+Requires: srt-libs%{?_isa} = %{version}-%{release}
+
 
 %description
 Secure Reliable Transport (SRT) is an open source transport technology that
@@ -34,7 +39,13 @@ Secure Reliable Transport protocol development libraries and header files
 
 
 %build
-%cmake -DENABLE_STATIC=OFF
+%cmake \
+  -DENABLE_STATIC=OFF \
+  -DENABLE_UNITTESTS=ON \
+  -DENABLE_GETNAMEINFO=ON \
+  -DUSE_ENCLIB=gnutls \
+  .
+
 %make_build
 
 
@@ -44,6 +55,13 @@ Secure Reliable Transport protocol development libraries and header files
 rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 
 
+%check
+make test
+
+
+%ldconfig_scriptlets libs
+
+
 %files
 %license LICENSE
 %doc README.md docs
@@ -51,6 +69,7 @@ rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 %{_bindir}/srt-file-transmit
 %{_bindir}/srt-live-transmit
 %{_bindir}/srt-tunnel
+%{_bindir}/test-srt
 
 %files libs
 %license LICENSE
@@ -62,7 +81,13 @@ rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 %{_libdir}/libsrt.so
 %{_libdir}/pkgconfig/srt.pc
 
+
 %changelog
+* Mon Apr 06 2020 Nicolas Chauvet <kwizart@gmail.com> - 1.4.1-3
+- Switch to gnutls instead of openssl
+- Enable tests
+- Enforce strict EVR from main to -libs
+
 * Fri Jan 31 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
