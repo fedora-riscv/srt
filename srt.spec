@@ -47,6 +47,14 @@ Secure Reliable Transport protocol development libraries and header files
 
 %install
 %make_install
+
+# Fix for lib64 install path
+%if "%{_lib}" == "lib64"
+mv %{buildroot}%{_prefix}/lib \
+  %{buildroot}%{_libdir}
+sed -i -e 's/lib/lib64/' %{buildroot}%{_libdir}/pkgconfig/*.pc
+%endif
+
 # remove old upstream temporary compatibility pc
 rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 
@@ -57,6 +65,7 @@ rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 %files
 %license LICENSE
 %doc README.md docs
+%{_bindir}/sfplay
 %{_bindir}/stransmit
 
 %files libs
@@ -64,7 +73,6 @@ rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 %{_libdir}/libsrt.so.1*
 
 %files devel
-%doc examples
 %{_includedir}/srt
 %{_libdir}/libsrt.so
 %{_libdir}/pkgconfig/srt.pc
