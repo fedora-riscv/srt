@@ -1,6 +1,8 @@
+%global __cmake_in_source_build 1
+
 Name:           srt
 Version:        1.4.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -87,6 +89,9 @@ make test \
 
 
 %changelog
+* Fri Jul 24 2020 Jeff Law <law@redhat.com> - 1.4.1-4
+- Use __cmake_in_source_build 
+
 * Mon Apr 06 2020 Nicolas Chauvet <kwizart@gmail.com> - 1.4.1-3
 - Switch to gnutls instead of openssl
 - Enable tests
