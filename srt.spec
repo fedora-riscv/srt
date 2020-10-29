@@ -1,8 +1,6 @@
-%global __cmake_in_source_build 1
-
 Name:           srt
-Version:        1.4.1
-Release:        5%{?dist}
+Version:        1.4.2
+Release:        1%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -45,14 +43,13 @@ Secure Reliable Transport protocol development libraries and header files
   -DENABLE_STATIC=OFF \
   -DENABLE_UNITTESTS=ON \
   -DENABLE_GETNAMEINFO=ON \
-  -DUSE_ENCLIB=gnutls \
-  .
+  -DUSE_ENCLIB=gnutls
 
-%make_build
+%cmake_build
 
 
 %install
-%make_install
+%cmake_install
 # remove old upstream temporary compatibility pc
 rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 
@@ -89,6 +86,9 @@ make test \
 
 
 %changelog
+* Thu Oct 29 2020 Nicolas Chauvet <kwizart@gmail.com> - 1.4.2-1
+- Update to 1.4.2
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
