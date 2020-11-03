@@ -1,11 +1,12 @@
 Name:           srt
 Version:        1.4.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
 URL:            https://www.srtalliance.org
 Source0:        https://github.com/Haivision/srt/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch0:         %{name}-gcc11.patch
 
 BuildRequires:  cmake gcc-c++
 BuildRequires:  gnutls-devel
@@ -35,7 +36,7 @@ Secure Reliable Transport protocol development libraries and header files
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 
 %build
@@ -86,6 +87,9 @@ make test \
 
 
 %changelog
+* Mon Nov 02 2020 Jeff Law <law@redhat.com> - 1.4.2-2
+- Fix missing #includes for gcc-11
+
 * Thu Oct 29 2020 Nicolas Chauvet <kwizart@gmail.com> - 1.4.2-1
 - Update to 1.4.2
 
