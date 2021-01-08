@@ -8,6 +8,7 @@ URL:            https://www.srtalliance.org
 Source0:        https://github.com/Haivision/srt/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0:         %{name}-gcc11.patch
 
+BuildRequires: make
 BuildRequires:  cmake gcc-c++
 BuildRequires:  gnutls-devel
 BuildRequires:  gmock-devel
