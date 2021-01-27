@@ -1,6 +1,6 @@
 Name:           srt
 Version:        1.4.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -88,6 +88,9 @@ make test \
 
 
 %changelog
+* Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Mon Nov 02 2020 Jeff Law <law@redhat.com> - 1.4.2-2
 - Fix missing #includes for gcc-11
 
