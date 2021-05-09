@@ -1,12 +1,11 @@
 Name:           srt
-Version:        1.4.2
-Release:        4%{?dist}
+Version:        1.4.3
+Release:        1%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
 URL:            https://www.srtalliance.org
 Source0:        https://github.com/Haivision/srt/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch0:         %{name}-gcc11.patch
 
 BuildRequires: make
 BuildRequires:  cmake gcc-c++
@@ -88,6 +87,9 @@ make test \
 
 
 %changelog
+* Sun May  9 2021 Yanko Kaneti <yaneti@declera.com> - 1.4.3-1
+- Update to 1.4.3. New soname
+
 * Tue Mar 30 2021 Jonathan Wakely <jwakely@redhat.com> - 1.4.2-4
 - Rebuilt for removed libstdc++ symbol (#1937698)
 
