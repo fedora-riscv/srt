@@ -1,6 +1,6 @@
 Name:           srt
 Version:        1.4.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -87,6 +87,9 @@ make test \
 
 
 %changelog
+* Mon Sep  6 2021 Yanko Kaneti <yaneti@declera.com> - 1.4.3-3
+- Bump rebuild for gtest soname change
+
 * Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
