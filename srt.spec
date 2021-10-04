@@ -1,6 +1,6 @@
 Name:           srt
-Version:        1.4.3
-Release:        3%{?dist}
+Version:        1.4.4
+Release:        1%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -56,10 +56,14 @@ rm -f %{buildroot}/%{_libdir}/pkgconfig/haisrt.pc
 
 
 %check
-# Fails with x390x
-make test \
-%ifarch s390x
-  || :
+# - test are broken on s390x for some slowness/timing reason
+# - tests can't be run in parallel because they reuse port numbers
+# - %%ctest macro doesn't support additional ctest arguments
+# - TestIPv6 are known broken due to v4_v6 mapping differnces between platforms
+#   https://github.com/Haivision/srt/issues/1972#
+%ifnarch s390x
+cd "%{__cmake_builddir}"
+%{__ctest} --output-on-failure --force-new-ctest-process -j1 -E TestIPv6
 %endif
 
 
@@ -73,11 +77,10 @@ make test \
 %{_bindir}/srt-file-transmit
 %{_bindir}/srt-live-transmit
 %{_bindir}/srt-tunnel
-%{_bindir}/test-srt
 
 %files libs
 %license LICENSE
-%{_libdir}/libsrt.so.1*
+%{_libdir}/libsrt.so.1.4*
 
 %files devel
 %doc examples
@@ -87,6 +90,11 @@ make test \
 
 
 %changelog
+* Mon Oct  4 2021 Yanko Kaneti <yaneti@declera.com> - 1.4.4-1
+- Update to 1.4.4
+- Various tweaks around tests/checks
+- Tighten soname wildcard
+
 * Mon Sep  6 2021 Yanko Kaneti <yaneti@declera.com> - 1.4.3-3
 - Bump rebuild for gtest soname change
 
