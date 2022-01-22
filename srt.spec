@@ -1,6 +1,6 @@
 Name:           srt
 Version:        1.4.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Secure Reliable Transport protocol tools
 
 License:        MPLv2.0
@@ -90,6 +90,9 @@ cd "%{__cmake_builddir}"
 
 
 %changelog
+* Sat Jan 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.4-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Mon Oct  4 2021 Yanko Kaneti <yaneti@declera.com> - 1.4.4-1
 - Update to 1.4.4
 - Various tweaks around tests/checks
