@@ -1,3 +1,0 @@
-# srt
-
-The srt package
